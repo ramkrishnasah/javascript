@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Harikesh Kashyap - Profile</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f172a, #1e293b, #3b0764, #1e3a8a, #0f172a);
+      background-size: 400% 400%;
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .profile-card {
+      background-color: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(6px);
+      border-radius: 1rem;
+      padding: 2.5rem;
+      max-width: 700px;
+      margin: auto;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    }
+
+    .profile-img {
+      border-radius: 9999px;
+      transition: transform 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+    }
+
+    .profile-img:hover {
+      transform: scale(1.05);
+    }
+
+    .social-icons a {
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      transform: scale(1.2);
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center px-4 py-10">
+
+  <div class="profile-card text-center">
+    <img src="Harikesh.jpeg" alt="Harikesh Kashyap" class="w-40 h-40 mx-auto mb-6 profile-img">
+    <h1 class="text-4xl font-bold mb-2">Harikesh Kashyap</h1>
+    <p class="text-green-300 mb-4 text-xl">Technical Head</p>
+    <p class="text-gray-200 mb-6 text-base leading-relaxed">
+      Harikesh leads the technical development and maintenance of the Smart Shop platform. Ensuring our technology
+      stays cutting-edge, his expertise guarantees the seamless experience users enjoy on mobile and web.
+    </p>
+
+    <p>Email: <span class="text-blue-200">harikesh.kashyap@example.com</span></p>
+    <p>Phone: <span class="text-blue-200">+91-9876543212</span></p>
+
+    <!-- Social Icons -->
+    <div class="mt-6 space-x-4 text-white social-icons">
+      <a href="https://linkedin.com/in/harikeshkashyap" target="_blank" class="hover:text-blue-400">
+        <i class="fab fa-linkedin-in text-2xl"></i>
+      </a>
+      <a href="https://instagram.com/harikesh_kashyap" target="_blank" class="hover:text-pink-400">
+        <i class="fab fa-instagram text-2xl"></i>
+      </a>
+      <a href="mailto:harikesh.kashyap@gmail.com" class="hover:text-red-400">
+        <i class="fab fa-google text-2xl"></i>
+      </a>
+    </div>
+  </div>
+
+</body>
+</html>

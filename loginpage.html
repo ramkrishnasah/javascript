@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>GalaxyPoint - Login</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <style>
+    :root {
+      --bg-color-night: #0f2027;
+      --bg-color-day: #f0f0f0;
+      --login-form-night: #1a202c;
+      --login-form-day: #fff;
+      --text-color-night: #fff;
+      --text-color-day: #333;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      background-color: var(--bg-color-night);
+      transition: background-color 0.3s ease;
+      color: var(--text-color-night);
+      overflow: hidden;
+    }
+
+    #bgCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+    }
+
+    @keyframes slideUp {
+      0% { transform: translateY(50px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    .theme-toggle-container {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+      z-index: 1;
+    }
+
+    .theme-toggle {
+      width: 40px;
+      height: 40px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: transparent;
+    }
+
+    .theme-toggle img {
+      width: 30px;
+      height: 30px;
+    }
+
+    .login-form {
+      background: var(--login-form-night);
+      padding: 40px;
+      border-radius: 10px;
+      width: 350px;
+      text-align: center;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+      transition: background 0.3s ease, color 0.3s ease;
+      animation: slideUp 0.8s ease-out;
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #000;
+      width: fit-content;
+      margin: 0 auto 20px auto;
+    }
+
+    hr {
+      border: 1px solid #000;
+      margin: 10px 0 20px;
+    }
+
+    .field p {
+      margin-bottom: 5px;
+      font-size: 1rem;
+      text-align: left;
+    }
+
+    .box {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      background-color: #f9f9f9;
+      color: black;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    .box::placeholder {
+      color: #888;
+    }
+
+    .tt {
+      text-align: right;
+      font-size: 0.9rem;
+    }
+
+    .tt a {
+      color: #3182ce;
+      text-decoration: none;
+    }
+
+    .tt a:hover {
+      text-decoration: underline;
+    }
+
+    .lbtn {
+      width: 100%;
+      padding: 12px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .lbtn:hover {
+      background-color: #2563eb;
+    }
+
+    body[data-theme='light'] .lbtn {
+      background-color: #4CAF50;
+    }
+
+    body[data-theme='dark'] .lbtn {
+      background-color: #38bdf8;
+    }
+
+    .link {
+      margin-top: 20px;
+      font-size: 0.9rem;
+    }
+
+    .link a {
+      color: #3182ce;
+      text-decoration: none;
+    }
+
+    .link a:hover {
+      text-decoration: underline;
+    }
+
+    .home-link {
+      color: #3182ce;
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 15px;
+      font-size: 1rem;
+    }
+
+    .home-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body data-theme="dark">
+
+  <!-- 3D Background Canvas -->
+  <canvas id="bgCanvas"></canvas>
+
+  <!-- Theme Toggle Button -->
+  <div class="theme-toggle-container" id="themeToggleContainer">
+    <div class="theme-toggle" id="themeToggle">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/sun.png" alt="Sun Icon" id="sunIcon">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/moon.png" alt="Moon Icon" id="moonIcon" style="display: none;">
+    </div>
+  </div>
+
+  <!-- Login Form -->
+  <div class="login-form">
+    <form method="post" action="login_details.php">
+      <a href="Index.html" class="home-link">← Home</a>
+      <h1>Log In</h1>
+      <hr>
+      <div class="field">
+        <p>Email</p>
+        <input type="email" name="email" class="box" placeholder="Enter Your Email" required>
+      </div>
+      <div class="field">
+        <p>Password</p>
+        <input type="password" name="pass" class="box" placeholder="Enter Your Password" required>
+      </div>
+      <p class="tt"><a href="forgetpwd.html">Forgot Password?</a></p>
+      <input type="submit" name="save" value="Log In" class="lbtn">
+      <div class="link">
+        Don't have an account? <a href="signuppage.html">Sign Up</a>
+      </div>
+    </form>
+  </div>
+
+  <!-- Theme Toggle Script -->
+  <script>
+    const toggleBtn = document.getElementById('themeToggle');
+    const body = document.body;
+    const loginForm = document.querySelector('.login-form');
+    const sunIcon = document.getElementById('sunIcon');
+    const moonIcon = document.getElementById('moonIcon');
+
+    toggleBtn.addEventListener('click', () => {
+      const isDark = body.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        body.style.backgroundColor = '#f0f0f0';
+        loginForm.style.backgroundColor = '#fff';
+        body.style.color = '#333';
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'inline';
+        body.setAttribute('data-theme', 'light');
+      } else {
+        body.style.backgroundColor = '#0f2027';
+        loginForm.style.backgroundColor = '#1a202c';
+        body.style.color = '#fff';
+        sunIcon.style.display = 'inline';
+        moonIcon.style.display = 'none';
+        body.setAttribute('data-theme', 'dark');
+      }
+    });
+  </script>
+
+  <!-- 3D Star Background Script -->
+  <script>
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bgCanvas'), alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.position.z = 5;
+
+    function addStar() {
+      const geometry = new THREE.SphereGeometry(0.05, 24, 24);
+      const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
+      const star = new THREE.Mesh(geometry, material);
+      const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread(100));
+      star.position.set(x, y, z);
+      scene.add(star);
+    }
+
+    Array(300).fill().forEach(addStar);
+
+    function animate() {
+      requestAnimationFrame(animate);
+      scene.rotation.x += 0.0005;
+      scene.rotation.y += 0.0007;
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Track Your Order - Balloons and Petals</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .order-status {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .status {
+      font-size: 1.25rem;
+      font-weight: bold;
+    }
+
+    .status p {
+      font-size: 1rem;
+      color: gray;
+    }
+
+    .progress {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 30px;
+    }
+
+    .step {
+      position: relative;
+      text-align: center;
+    }
+
+    .step::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 4px;
+      height: 60px;
+      background-color: #4CAF50;
+      z-index: -1;
+      transform: translate(-50%, -50%);
+    }
+
+    .step.completed::before {
+      background-color: #4CAF50;
+    }
+
+    .step-text {
+      font-size: 1rem;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .step.completed .step-text {
+      color: #4CAF50;
+    }
+
+    .step-text.pending {
+      color: #FF9800;
+    }
+
+    .step-text.completed {
+      color: #4CAF50;
+    }
+
+    .step-icon {
+      font-size: 2rem;
+      background-color: #fff;
+      border-radius: 50%;
+      padding: 10px;
+      border: 2px solid #4CAF50;
+    }
+
+    .step.completed .step-icon {
+      background-color: #4CAF50;
+      color: white;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 font-sans">
+
+  <div class="max-w-5xl mx-auto p-6 mt-10 bg-white shadow-md rounded-lg">
+    <h1 class="text-2xl font-bold mb-6 text-center">Track Your Order</h1>
+
+    <div class="order-status">
+      <div>
+        <h2 class="text-xl font-semibold">Order ID: #1234567890</h2>
+        <p class="text-gray-600">Placed on: April 12, 2025</p>
+      </div>
+      <div>
+        <span class="text-xl font-semibold text-green-600">Delivered</span>
+      </div>
+    </div>
+
+    <div class="progress mt-8">
+      <div class="step completed">
+        <div class="step-icon">✔</div>
+        <div class="step-text completed">Order Placed</div>
+      </div>
+      <div class="step completed">
+        <div class="step-icon">✔</div>
+        <div class="step-text completed">Processed</div>
+      </div>
+      <div class="step completed">
+        <div class="step-icon">✔</div>
+        <div class="step-text completed">Shipped</div>
+      </div>
+      <div class="step">
+        <div class="step-icon">✔</div>
+        <div class="step-text pending">Out for Delivery</div>
+      </div>
+      <div class="step">
+        <div class="step-icon">✔</div>
+        <div class="step-text pending">Delivered</div>
+      </div>
+    </div>
+
+    <div class="mt-8">
+      <h3 class="text-lg font-semibold mb-2">Order Details</h3>
+      <div class="space-y-4">
+        <div>
+          <p class="font-medium">Product: Nord 4 5G (8+256 GB)</p>
+          <p class="text-sm text-gray-500">Snapdragon 7+ Gen 3</p>
+        </div>
+        <div>
+          <p class="font-medium">Shipping Address</p>
+          <p class="text-sm text-gray-600">123 Main Street, City, State, 12345</p>
+        </div>
+        <div>
+          <p class="font-medium">Payment Method: Credit Card</p>
+        </div>
+        <div class="font-semibold text-lg mt-2">
+          <span>Total: ₹24,999</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-8 text-center">
+      <a href="index.html" class="bg-blue-600 text-white py-3 px-8 rounded hover:bg-blue-700 transition">
+        Go Back to Shopping
+      </a>
+    </div>
+  </div>
+
+</body>
+</html>

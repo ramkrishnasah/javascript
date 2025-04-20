@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(45deg, #ff6ec4, #7873f5, #4ade80);
+      background-size: 200% 200%;
+      animation: waveBackground 10s ease-in-out infinite;
+      font-family: Arial, sans-serif;
+    }
+
+    @keyframes waveBackground {
+      0% { background-position: 0% 50%; }
+      25% { background-position: 50% 100%; }
+      50% { background-position: 100% 50%; }
+      75% { background-position: 50% 0%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .slider-container {
+      position: relative;
+      width: 100%;
+      max-width: 1200px;
+      margin: auto;
+      overflow: hidden;
+    }
+
+    .slider {
+      display: flex;
+      transition: transform 1s ease-in-out;
+    }
+
+    .slider a {
+      min-width: 100%;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    .member-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .member-img:hover {
+      transform: scale(1.1);
+    }
+
+    .member-info h3, .member-info p {
+      margin: 10px 0;
+    }
+
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      padding: 10px;
+      font-size: 24px;
+      border: none;
+      cursor: pointer;
+      z-index: 1;
+    }
+
+    .prev {
+      left: 10px;
+    }
+
+    .next {
+      right: 10px;
+    }
+
+    /* Member Detail Section */
+    .member-detail {
+      text-align: center;
+      padding: 40px;
+      background-color: white;
+      margin-top: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .member-img-detail {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      object-fit: cover;
+    }
+
+    .member-info-detail h3, .member-info-detail p {
+      margin: 10px 0;
+    }
+
+    /* Section for members */
+    .member-section {
+      display: none;
+    }
+
+    .active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold text-center text-white mb-8">Contact Us</h1>
+
+    <div class="slider-container">
+      <div class="slider">
+        <!-- Member 1 (Alice) -->
+        <a href="javascript:void(0);" onclick="showMemberDetails('alice')">
+          <img src="images/alice.jpg" alt="Alice" class="member-img">
+          <div class="member-info">
+            <h3>Alice Johnson</h3>
+            <p>Project Manager</p>
+            <p>alice@example.com</p>
+          </div>
+        </a>
+
+        <!-- Member 2 (Bob) -->
+        <a href="javascript:void(0);" onclick="showMemberDetails('bob')">
+          <img src="images/bob.jpg" alt="Bob" class="member-img">
+          <div class="member-info">
+            <h3>Bob Smith</h3>
+            <p>Lead Developer</p>
+            <p>bob@example.com</p>
+          </div>
+        </a>
+
+        <!-- Member 3 (Charlie) -->
+        <a href="javascript:void(0);" onclick="showMemberDetails('charlie')">
+          <img src="images/charlie.jpg" alt="Charlie" class="member-img">
+          <div class="member-info">
+            <h3>Charlie Lee</h3>
+            <p>UI/UX Designer</p>
+            <p>charlie@example.com</p>
+          </div>
+        </a>
+
+        <!-- Member 4 (Dana) -->
+        <a href="javascript:void(0);" onclick="showMemberDetails('dana')">
+          <img src="images/dana.jpg" alt="Dana" class="member-img">
+          <div class="member-info">
+            <h3>Dana Kim</h3>
+            <p>Marketing Head</p>
+            <p>dana@example.com</p>
+          </div>
+        </a>
+      </div>
+      <button class="slider-btn prev" onclick="moveSlide(-1)">❮</button>
+      <button class="slider-btn next" onclick="moveSlide(1)">❯</button>
+    </div>
+
+    <div id="alice" class="member-section">
+      <div class="member-detail">
+        <img src="images/alice.jpg" alt="Alice Johnson" class="member-img-detail">
+        <h3>Alice Johnson</h3>
+        <p>Project Manager</p>
+        <p>Email: alice@example.com</p>
+        <p>Alice is the Project Manager with over 10 years of experience in managing large-scale projects across various industries. She is passionate about ensuring project success and client satisfaction.</p>
+        <a href="javascript:void(0);" onclick="hideMemberDetails()">Back</a>
+      </div>
+    </div>
+
+    <div id="bob" class="member-section">
+      <div class="member-detail">
+        <img src="images/bob.jpg" alt="Bob Smith" class="member-img-detail">
+        <h3>Bob Smith</h3>
+        <p>Lead Developer</p>
+        <p>Email: bob@example.com</p>
+        <p>Bob is the lead developer with expertise in full-stack development. He has worked on various projects involving cutting-edge technologies and ensures high-quality coding standards.</p>
+        <a href="javascript:void(0);" onclick="hideMemberDetails()">Back</a>
+      </div>
+    </div>
+
+    <div id="charlie" class="member-section">
+      <div class="member-detail">
+        <img src="images/charlie.jpg" alt="Charlie Lee" class="member-img-detail">
+        <h3>Charlie Lee</h3>
+        <p>UI/UX Designer</p>
+        <p>Email: charlie@example.com</p>
+        <p>Charlie is the UI/UX Designer who is passionate about creating intuitive user experiences. He designs interfaces that make it easy for users to navigate and enjoy their experience.</p>
+        <a href="javascript:void(0);" onclick="hideMemberDetails()">Back</a>
+      </div>
+    </div>
+
+    <div id="dana" class="member-section">
+      <div class="member-detail">
+        <img src="images/dana.jpg" alt="Dana Kim" class="member-img-detail">
+        <h3>Dana Kim</h3>
+        <p>Marketing Head</p>
+        <p>Email: dana@example.com</p>
+        <p>Dana leads the marketing team, driving strategies that focus on brand growth and visibility. She has over 5 years of experience in digital marketing and enjoys creative problem-solving.</p>
+        <a href="javascript:void(0);" onclick="hideMemberDetails()">Back</a>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    let slideIndex = 0;
+
+    function showSlide(index) {
+      const slides = document.querySelectorAll('.slider a');
+      if (index >= slides.length) slideIndex = 0;
+      if (index < 0) slideIndex = slides.length - 1;
+
+      const newTransformValue = -100 * slideIndex + '%';
+      document.querySelector('.slider').style.transform = `translateX(${newTransformValue})`;
+    }
+
+    function moveSlide(step) {
+      slideIndex += step;
+      showSlide(slideIndex);
+    }
+
+    setInterval(function() {
+      slideIndex++;
+      showSlide(slideIndex);
+    }, 5000);
+
+    function showMemberDetails(member) {
+      document.getElementById('alice').classList.remove('active');
+      document.getElementById('bob').classList.remove('active');
+      document.getElementById('charlie').classList.remove('active');
+      document.getElementById('dana').classList.remove('active');
+      
+      document.getElementById(member).classList.add('active');
+    }
+
+    function hideMemberDetails() {
+      document.getElementById('alice').classList.remove('active');
+      document.getElementById('bob').classList.remove('active');
+      document.getElementById('charlie').classList.remove('active');
+      document.getElementById('dana').classList.remove('active');
+    }
+  </script>
+</body>
+</html>
+
+
+
+<!-- Image Slider -->
+<script>
+  const slider = document.getElementById("slider");
+  let index = 0;
+  const total = slider.children.length;
+  setInterval(() => {
+    index = (index + 1) % total;
+    slider.style.transform = `translateX(-${index * 100}%)`;
+  }, 3000);
+</script>
+

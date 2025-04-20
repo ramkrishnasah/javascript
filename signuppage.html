@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sign Up</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      font-family: 'Segoe UI', sans-serif;
+      height: 100%;
+      overflow: hidden;
+      color: white;
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #000;
+    }
+
+    .container {
+      display: flex;
+      width: 80%;
+      max-width: 1000px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+      background: linear-gradient(to right, #000000, #002f4b);
+      z-index: 1;
+    }
+
+    .left-panel {
+      flex: 1;
+      background: #0b0c2a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .left-panel img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: transform 1s ease, opacity 1s ease;
+    }
+
+    .left-panel img.active {
+      opacity: 1;
+      transform: translateX(0);
+      z-index: 1;
+    }
+
+    .left-panel img.incoming {
+      transform: translateX(100%);
+      z-index: 2;
+    }
+
+    .left-panel img.outgoing {
+      transform: translateX(-100%);
+      opacity: 0;
+      z-index: 0;
+    }
+
+    .right-panel {
+      flex: 1;
+      padding: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid white;
+      width: fit-content;
+      animation: slideUp 1s ease-out forwards;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      animation: slideUp 1s ease-out forwards;
+    }
+
+    .input-group {
+      position: relative;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: bold;
+    }
+
+    .input-group input {
+      padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: 1px solid #333;
+      background-color: #111;
+      color: white;
+      width: 100%;
+    }
+
+    .input-group img.icon {
+      position: absolute;
+      left: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      opacity: 0.8;
+    }
+
+    button {
+      padding: 1rem;
+      font-size: 1.2rem;
+      font-weight: bold;
+      background-color: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #2563eb;
+    }
+
+    @keyframes slideUp {
+      0% {
+        transform: translateY(100px);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .login-link {
+      margin-top: 1.5rem;
+      text-align: center;
+      font-size: 1rem;
+    }
+
+    .login-link a {
+      color: #3b82f6;
+      text-decoration: none;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="bg"></canvas>
+
+  <div class="container">
+    <div class="left-panel" id="image-slider">
+      <img src="signup1.jpg" class="active" alt="Image 1">
+      <img src="signup2.jpg" alt="Image 2">
+      <img src="signup3.png" alt="Image 3">
+    </div>
+    <div class="right-panel">
+      <h2>Sign Up</h2>
+      <form id="signup-form" method="POST" action="signup_details.php">
+        <div class="input-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Enter Your Name" />
+        </div>
+
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="Enter Your Email" />
+        </div>
+
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter Your Password" />
+        </div>
+
+        <div class="input-group">
+          <label for="confirm">Confirm Password</label>
+          <input type="password" id="confirm" name="confirm" placeholder="Enter Password Again" />
+        </div>
+
+        <button type="submit">Sign Up</button>
+      </form>
+
+      <div class="login-link">
+        <p>Already have an account? <a href="loginpage.html">Log In</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script>
+    // 3D Background
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 5;
+
+    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg'), alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+
+    const particlesCount = 800;
+    const positions = new Float32Array(particlesCount * 3);
+    for (let i = 0; i < particlesCount * 3; i++) {
+      positions[i] = (Math.random() - 0.5) * 20;
+    }
+
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+    const material = new THREE.PointsMaterial({
+      color: 0x3b82f6,
+      size: 0.05,
+    });
+
+    const points = new THREE.Points(geometry, material);
+    scene.add(points);
+
+    function animate() {
+      requestAnimationFrame(animate);
+      points.rotation.y += 0.001;
+      points.rotation.x += 0.0005;
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // Image Slider
+    const images = document.querySelectorAll('#image-slider img');
+    let current = 0;
+    
+    setInterval(() => {
+      const currentImg = images[current];
+      const next = (current + 1) % images.length;
+      const nextImg = images[next];
+  
+      currentImg.classList.remove('active');
+      currentImg.classList.add('outgoing');
+  
+      nextImg.classList.add('incoming');
+      setTimeout(() => {
+        nextImg.classList.remove('incoming');
+        nextImg.classList.add('active');
+        currentImg.classList.remove('outgoing');
+      }, 1500);
+  
+      current = next;
+    }, 1500);
+
+    // Form validation + redirect
+    document.getElementById('signup-form').addEventListener('submit', function (e) {
+      e.preventDefault(); // Prevent the default form submission
+
+      const name = document.getElementById('name');
+      const email = document.getElementById('email');
+      const password = document.getElementById('password');
+      const confirm = document.getElementById('confirm');
+
+      let isValid = true;
+      let messages = [];
+
+      if (name.value.trim() === '') {
+        isValid = false;
+        messages.push('Name is required.');
+      }
+
+      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+      if (!emailPattern.test(email.value)) {
+        isValid = false;
+        messages.push('Please enter a valid email.');
+      }
+
+      if (password.value.length < 6) {
+        isValid = false;
+        messages.push('Password must be at least 6 characters.');
+      }
+
+      if (password.value !== confirm.value) {
+        isValid = false;
+        messages.push('Passwords do not match.');
+      }
+
+      if (!isValid) {
+        alert(messages.join('\n'));
+      } else {
+        // Form can be submitted or you can do something like sending data via AJAX
+        alert('Sign Up Successful!');
+        window.location.href = 'shop.html';  // Redirect to shop page
+      }
+    });
+  </script>
+</body>
+</html>
